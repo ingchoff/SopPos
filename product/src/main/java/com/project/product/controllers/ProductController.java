@@ -25,12 +25,16 @@ public class ProductController {
     }
 
     @GetMapping(params = "name")
-    public List<Product> getProduct(@RequestParam(value = "name") String name) {
-        return productServices.getByName(name);
+    public ResponseEntity<?> getProduct(@RequestParam(value = "name") String name) {
+        Optional<Product> product = productServices.getByName(name);
+        if(!product.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product);
     }
 
     @PostMapping()
-    public ResponseEntity<?> postCustomer(@Valid @RequestBody ArrayList<Product> body) {
+    public ResponseEntity<?> postProduct(@Valid @RequestBody ArrayList<Product> body) {
         if (productServices.checkDuplicate(body)) {
             productServices.createProducts(body);
             return ResponseEntity.status(HttpStatus.CREATED).body(body);
@@ -41,7 +45,15 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
-        if (!productServices.deleteProduct(id)) {
+        if (!productServices.deleteProductById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(params = "name")
+    public ResponseEntity<?> deleteProduct(@RequestParam(value = "name") String name) {
+        if (!productServices.deleteProductByName(name)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().build();
@@ -53,6 +65,6 @@ public class ProductController {
         if (!product.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(product);
     }
 }

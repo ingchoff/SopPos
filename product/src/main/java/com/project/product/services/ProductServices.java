@@ -24,7 +24,7 @@ public class ProductServices {
         return (List<Product>) productRepository.findAll();
     }
 
-    public List<Product> getByName(String name) {
+    public Optional<Product> getByName(String name) {
         return productRepository.findByProductName(name);
     }
 
@@ -33,13 +33,22 @@ public class ProductServices {
     }
 
     public void createProducts(ArrayList<Product> product) {
-        List<Product> products = (List<Product>) productRepository.findAll();
         product.forEach((p) -> productRepository.save(p));
     }
 
-    public boolean deleteProduct(Long id) {
+    public boolean deleteProductById(Long id) {
         try {
             productRepository.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+    }
+
+    public boolean deleteProductByName(String productName) {
+        try {
+            Optional<Product> result = productRepository.findByProductName(productName);
+            productRepository.deleteById(result.get().getId());
             return true;
         } catch (EmptyResultDataAccessException e) {
             return false;
