@@ -1,4 +1,4 @@
-package com.project.account.model;
+package com.project.order.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,36 +9,22 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "income")
+@Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt"},
-        allowGetters = true)
-public class IncomeModel {
+@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
+public class OrderModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @NotNull
-    private Long invoice_id;
-
-    @NotNull
-    private Double price;
+    private String status;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     @CreatedDate
     private Date createdAt;
-
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public Long getId() {
         return id;
@@ -48,19 +34,20 @@ public class IncomeModel {
         this.id = id;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Long getInvoice_id() {
-        return invoice_id;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInvoice_id(Long invoice_id) {
-        this.invoice_id = invoice_id;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
+
 }

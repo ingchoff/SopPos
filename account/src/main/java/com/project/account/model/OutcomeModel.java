@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name = "outcome")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+@JsonIgnoreProperties(value = {"createdAt"},
         allowGetters = true)
 public class OutcomeModel {
 
