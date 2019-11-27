@@ -3,7 +3,6 @@ package com.project.authenservice.model;
 
 import com.project.authenservice.model.audit.DateAudit;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -42,7 +41,7 @@ public class UserModel extends DateAudit {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleModel> roles = new HashSet<>();
 
     public UserModel() {}
 
@@ -93,11 +92,11 @@ public class UserModel extends DateAudit {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleModel> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleModel> roles) {
         this.roles = roles;
     }
 }
