@@ -2,6 +2,7 @@ package com.project.productlist.services;
 
 import com.project.productlist.entities.Product;
 import com.project.productlist.entities.ProductList;
+import com.project.productlist.entities.Stock;
 import com.project.productlist.repositories.ProductListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -49,6 +50,19 @@ public class ProductListService {
             ArrayList<ProductList> productArray = productListRepository.findByProductName(productName);
             for (ProductList pl: productArray) {
                 pl.setProductName(product.getProductName());
+                productListRepository.save(pl);
+            }
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return  false;
+        }
+    }
+
+    public boolean updateProductListStock(String sku, Stock stock) {
+        try {
+            ArrayList<ProductList> productArray = productListRepository.findBySkuId(sku);
+            for (ProductList pl: productArray) {
+                pl.setSkuId(stock.getSkuId());
                 productListRepository.save(pl);
             }
             return true;

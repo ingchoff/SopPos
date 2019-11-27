@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface ProductListRepository extends CrudRepository<ProductList, Long> {
     ArrayList<ProductList> findByProductName(String name);
+    ArrayList<ProductList> findBySkuId(String sku);
 }

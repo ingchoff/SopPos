@@ -2,6 +2,7 @@ package com.project.productlist.controllers;
 
 import com.project.productlist.entities.Product;
 import com.project.productlist.entities.ProductList;
+import com.project.productlist.entities.Stock;
 import com.project.productlist.services.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +52,14 @@ public class ProductListController {
     @PostMapping(params = "name")
     public ResponseEntity<?> updateProductList(@RequestParam(value = "name") String name, @RequestBody Product product) {
         if (!productListService.updateProductList(name, product)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(params = "skuid")
+    public ResponseEntity<?> updateProductListStock(@RequestParam(value = "skuid") String sku, @RequestBody Stock stock) {
+        if (!productListService.updateProductListStock(sku, stock)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().build();
