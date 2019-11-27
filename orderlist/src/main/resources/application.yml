@@ -1,22 +1,22 @@
 server:
-  port: 8095
+  port: 8094
 spring:
   application:
-    name: orderservice
+    name: orderlistservice
   profiles:
     active: default
   cloud:
     config:
       enabled: true
   datasource:
-    url: jdbc:mysql://localhost:3306/order
+    url: jdbc:mysql://localhost:3306/orderlist
     username: root
     password: P@ssw0rd
     initialization-mode: always
   jpa:
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+          hibernate:
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
 eureka:

@@ -19,7 +19,7 @@ public class OrderlistController {
     public OrderlistModel createOrder(@Valid @RequestBody OrderlistModel orderlistModel){
         return orderService.createOne(orderlistModel);
     }
-    @PostMapping("/create")
+    @PostMapping("/creates")
     public List<OrderlistModel> createManyOrder(@Valid @RequestBody List<OrderlistModel> orderlistModels){
         return orderService.createMany(orderlistModels);
     }
