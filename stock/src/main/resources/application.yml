@@ -1,0 +1,25 @@
+server:
+  port: 8096
+spring:
+  application:
+    name: stockservice
+  profiles:
+    active: default
+  cloud:
+    config:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/stock
+    username: root
+    password: P@ssw0rd
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
