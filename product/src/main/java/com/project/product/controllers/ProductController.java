@@ -33,13 +33,13 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @PostMapping()
-    public ResponseEntity<?> postProduct(@Valid @RequestBody ArrayList<Product> body) {
+    @PostMapping("/add")
+    public ResponseEntity<?> postProduct(@Valid @RequestBody Product body) {
         if (productServices.checkDuplicate(body)) {
-            productServices.createProducts(body);
-            return ResponseEntity.status(HttpStatus.CREATED).body(body);
+            Product product = productServices.createProduct(body);
+            return ResponseEntity.status(HttpStatus.CREATED).body(product);
         } else {
-            return ResponseEntity.badRequest().body("มีชื่อโปรดักซ้ำกับข้อมูลที่มีอยู่");
+            return ResponseEntity.badRequest().body("มีชื่อโปรดักซ้ำกับข้อมูลทีมีอยู่");
         }
     }
 
