@@ -3,7 +3,11 @@ package com.project.account.service;
 import com.project.account.exception.ResourceNotFoundException;
 import com.project.account.model.OutcomeModel;
 import com.project.account.repository.OutcomeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +15,9 @@ import java.util.List;
 
 @Service
 public class OutcomeService {
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     private SimpleDateFormat formatDate;
     private OutcomeRepository outcomeRepository;
 
@@ -24,6 +31,10 @@ public class OutcomeService {
     }
 
     public OutcomeModel createOutcome(OutcomeModel income){
+        RestTemplate restTemplate = new RestTemplate();
+        List<ServiceInstance> instances = discoveryClient.getInstances("stockservice");
+        String serviceUri = String.format("%s/api/stock/add", instances.get(0).getUri().toString());
+        restTemplate.postForObject(serviceUri, income, OutcomeModel.class);
         return outcomeRepository.save(income);
     }
 

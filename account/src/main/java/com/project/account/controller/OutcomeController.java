@@ -21,7 +21,7 @@ public class OutcomeController {
     OutcomeService outcomeService;
 
     @GetMapping("/get")
-    public List<OutcomeModel> getAllOutcomeModle(){
+    public List<OutcomeModel> getAllOutcomeModel(){
         return outcomeService.getAll();
     }
 
