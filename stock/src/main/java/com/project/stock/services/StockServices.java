@@ -1,5 +1,6 @@
 package com.project.stock.services;
 
+import com.project.stock.entities.Outcome;
 import com.project.stock.entities.Stock;
 import com.project.stock.repositories.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,15 @@ public class StockServices {
         });
         ans = !checklist.contains(body.getStockName());
         return ans;
+    }
+
+    public void addStock(Outcome outcome) {
+        Optional<Stock> optionalStock = stockRepository.findBySkuId(outcome.getSku_id());
+        Stock result = optionalStock.get();
+        Double quantity = result.getQuantity() + outcome.getQuantity();
+        result.setQuantity(quantity);
+        Double price = result.getPrice() + outcome.getPrice();
+        result.setPrice(price);
+        Optional.of(stockRepository.save(result));
     }
 }

@@ -1,5 +1,6 @@
 package com.project.stock.Controller;
 
+import com.project.stock.entities.Outcome;
 import com.project.stock.entities.Stock;
 import com.project.stock.services.StockServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<?> postStock(@Valid @RequestBody Stock body) {
         if (stockServices.checkDuplicate(body)) {
             Stock stock = stockServices.createStock(body);
@@ -42,6 +43,12 @@ public class StockController {
         } else {
             return ResponseEntity.badRequest().body("มีชื่อวัตถุดิบซ้ำกับข้อมูลทีมีอยู่");
         }
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addStock(@Valid @RequestBody Outcome outcome) {
+        stockServices.addStock(outcome);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
