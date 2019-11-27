@@ -1,0 +1,29 @@
+server:
+  port: 8097
+spring:
+  application:
+    name: accountservice
+  profiles:
+    active: default
+  cloud:
+    config:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/account
+    username: root
+    password: 1234
+    initialization-mode: always
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9090/eureka
