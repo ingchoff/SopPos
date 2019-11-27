@@ -22,5 +22,5 @@ public class Invoice {
     private Date createAt;
 
     @NotNull
-    private Integer oid;
+    private Long oid;
 }

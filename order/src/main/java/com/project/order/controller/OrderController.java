@@ -1,6 +1,7 @@
 package com.project.order.controller;
 
 
+import com.project.order.model.InvoiceModel;
 import com.project.order.model.OrderModel;
 import com.project.order.service.Orderservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,8 @@ public class OrderController {
         return orderservice.getDateOrder(10, year);
     }
 
-    @PutMapping("/update")
-    public OrderModel updateOrder(@Valid @RequestBody OrderModel orderModel){
-        return orderservice.updateOrder(orderModel.getId(), orderModel.getStatus());
+    @PostMapping("/update")
+    public OrderModel updateOrder(@Valid @RequestBody InvoiceModel invoiceModel){
+        return orderservice.updateOrder(invoiceModel, "done");
     }
 }

@@ -31,8 +31,8 @@ public class InvoiceController {
         return ResponseEntity.ok(invoice);
     }
 
-    @PostMapping()
-    public ResponseEntity<?> postProduct(@RequestBody Invoice body) {
+    @PostMapping("/create")
+    public ResponseEntity<?> postInvoice(@RequestBody Invoice body) {
         Invoice invoice = invoiceService.createInvoice(body);
         return ResponseEntity.status(HttpStatus.CREATED).body(invoice);
     }

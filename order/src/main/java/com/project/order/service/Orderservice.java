@@ -2,6 +2,7 @@ package com.project.order.service;
 
 import com.netflix.discovery.DiscoveryClient;
 import com.project.order.exception.ResourceNotFoundException;
+import com.project.order.model.InvoiceModel;
 import com.project.order.model.OrderModel;
 import com.project.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,8 @@ public class Orderservice {
         return listOrder;
     }
 
-    public OrderModel updateOrder(Long id, String status){
-        OrderModel order = getById(id);
+    public OrderModel updateOrder(InvoiceModel invoiceModel, String status){
+        OrderModel order = getById(invoiceModel.getOid());
         order.setStatus(status);
         return orderRepository.save(order);
     }
