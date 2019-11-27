@@ -1,9 +1,10 @@
-package com.project.account.account.controller;
+package com.project.account.controller;
 
 
-import com.project.account.account.exception.ResourceNotFoundException;
-import com.project.account.account.model.IncomeModel;
-import com.project.account.account.repository.IncomeRepository;
+
+import com.project.account.exception.ResourceNotFoundException;
+import com.project.account.model.IncomeModel;
+import com.project.account.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,57 +38,57 @@ public class IncomeController {
                 .orElseThrow(() -> new ResourceNotFoundException("IncomeModel", "id", incomeId));
     }
 
-     @GetMapping("/get/allincome")
+    @GetMapping("/get/allincome")
     public Double getAllmoney(){
         List<IncomeModel> allIncome = incomeRepository.findAll();
-         Double sum = 0.0;
-         for (IncomeModel temp: allIncome) {
-             sum += temp.getPrice();
-         }
+        Double sum = 0.0;
+        for (IncomeModel temp: allIncome) {
+            sum += temp.getPrice();
+        }
         return sum;
-     }
-     @GetMapping("/get/dateincome/{date}")
-     public Double getDateincome(@PathVariable(name = "date") String date) throws ParseException {
+    }
+    @GetMapping("/get/dateincome/{date}")
+    public Double getDateincome(@PathVariable(name = "date") String date) throws ParseException {
         Double sum =0.0;
         List<IncomeModel> allincome = incomeRepository.findAll();
         // cann't figure out how to use findBy
-         for (IncomeModel temp: allincome) {
-             if (formatdate.format(temp.getCreatedAt()).equals(date)){
-                 sum += temp.getPrice();
-             }
-         }
-         return sum;
-     }
+        for (IncomeModel temp: allincome) {
+            if (formatdate.format(temp.getCreatedAt()).equals(date)){
+                sum += temp.getPrice();
+            }
+        }
+        return sum;
+    }
 
-     @GetMapping("/get/monthincome/{month}")
-     public Double getMonthincome(@PathVariable(name = "month")String month){
+    @GetMapping("/get/monthincome/{month}")
+    public Double getMonthincome(@PathVariable(name = "month")String month){
         Double sum = 0.0;
         String str = "";
         List<IncomeModel> allincome = incomeRepository.findAll();
-         // cann't figure out how to use findBy
-         for (IncomeModel temp : allincome) {
-             str = formatdate.format(temp.getCreatedAt()).substring(0,7);
-             if(str.equals(month)){
+        // cann't figure out how to use findBy
+        for (IncomeModel temp : allincome) {
+            str = formatdate.format(temp.getCreatedAt()).substring(0,7);
+            if(str.equals(month)){
                 sum += temp.getPrice();
-             }
-         }
-         return sum;
-     }
+            }
+        }
+        return sum;
+    }
 
-     @GetMapping("/get/yearincome/{year}")
+    @GetMapping("/get/yearincome/{year}")
     public Double getYearincome(@PathVariable(name = "year")String year){
         Double sum = 0.0;
         String str = "";
         List<IncomeModel> allincome = incomeRepository.findAll();
-         // cann't figure out how to use findBy
-         for (IncomeModel temp : allincome) {
-             str = formatdate.format(temp.getCreatedAt()).substring(0, 4);
-             if(str.equals(year)){
-                 sum += temp.getPrice();
-             }
-         }
-         return sum;
-     }
+        // cann't figure out how to use findBy
+        for (IncomeModel temp : allincome) {
+            str = formatdate.format(temp.getCreatedAt()).substring(0, 4);
+            if(str.equals(year)){
+                sum += temp.getPrice();
+            }
+        }
+        return sum;
+    }
 
     @GetMapping("/get/list/date/{date}")
     public List<IncomeModel> getListDate(@PathVariable(name = "date")String date){

@@ -1,8 +1,9 @@
-package com.project.account.account.controller;
+package com.project.account.controller;
 
-import com.project.account.account.exception.ResourceNotFoundException;
-import com.project.account.account.model.OutcomeModel;
-import com.project.account.account.repository.OutcomeRepository;
+
+import com.project.account.exception.ResourceNotFoundException;
+import com.project.account.model.OutcomeModel;
+import com.project.account.repository.OutcomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +53,7 @@ public class OutcomeController {
         // cann't figure out how to use findBy
         for (OutcomeModel temp: alloutcome) {
             if (formatdate.format(temp.getCreatedAt()).equals(date))
-            sum += temp.getPrice();
+                sum += temp.getPrice();
         }
         return sum;
     }
@@ -190,3 +191,4 @@ public class OutcomeController {
     }
 
 }
+
