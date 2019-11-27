@@ -130,4 +130,65 @@ public class IncomeController {
         return listoutcome;
     }
 
+    @GetMapping("/get/mostincome/date/{date}")
+    public IncomeModel getMostDateIncome(@PathVariable(name = "date")String date){
+        List<IncomeModel> allincome = incomeRepository.findAll();
+        IncomeModel mostIncome = new IncomeModel();
+        Integer count = 0;
+        for ( IncomeModel temp: allincome) {
+            if (formatdate.format(temp.getCreatedAt()).equals(date)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostIncome.getPrice()) {
+                        mostIncome = temp;
+                    }
+                }else {
+                    mostIncome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostIncome;
+    }
+
+    @GetMapping("/get/mostincome/month/{month}")
+    public IncomeModel getMostMonthIncome(@PathVariable(name = "month")String month){
+        List<IncomeModel> allincome = incomeRepository.findAll();
+        IncomeModel mostIncome = new IncomeModel();
+        Integer count = 0;
+        for ( IncomeModel temp: allincome) {
+            if (formatdate.format(temp.getCreatedAt()).substring(0,7).equals(month)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostIncome.getPrice()) {
+                        mostIncome = temp;
+                    }
+                }else {
+                    mostIncome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostIncome;
+    }
+
+    @GetMapping("/get/mostincome/year/{year}")
+    public IncomeModel getMostYearIncome(@PathVariable(name = "year")String year){
+        List<IncomeModel> allincome = incomeRepository.findAll();
+        IncomeModel mostIncome = new IncomeModel();
+        Integer count = 0;
+        for ( IncomeModel temp: allincome) {
+            if (formatdate.format(temp.getCreatedAt()).substring(0,4).equals(year)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostIncome.getPrice()) {
+                        mostIncome = temp;
+                    }
+                }else {
+                    mostIncome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostIncome;
+    }
+
+
 }

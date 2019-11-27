@@ -129,4 +129,64 @@ public class OutcomeController {
         return listoutcome;
     }
 
+    @GetMapping("/get/mostoutcome/date/{date}")
+    public OutcomeModel getMostDateIncome(@PathVariable(name = "date")String date){
+        List<OutcomeModel> alloutcome = outcomeRepository.findAll();
+        OutcomeModel mostOutcome = new OutcomeModel();
+        Integer count = 0;
+        for ( OutcomeModel temp: alloutcome) {
+            if (formatdate.format(temp.getCreatedAt()).equals(date)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostOutcome.getPrice()) {
+                        mostOutcome = temp;
+                    }
+                }else {
+                    mostOutcome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostOutcome;
+    }
+
+    @GetMapping("/get/mostoutcome/month/{month}")
+    public OutcomeModel getMostMonthIncome(@PathVariable(name = "month")String month){
+        List<OutcomeModel> alloutcome = outcomeRepository.findAll();
+        OutcomeModel mostOutcome = new OutcomeModel();
+        Integer count = 0;
+        for ( OutcomeModel temp: alloutcome) {
+            if (formatdate.format(temp.getCreatedAt()).substring(0,7).equals(month)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostOutcome.getPrice()) {
+                        mostOutcome = temp;
+                    }
+                }else {
+                    mostOutcome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostOutcome;
+    }
+
+    @GetMapping("/get/mostoutcome/year/{year}")
+    public OutcomeModel getMostYearIncome(@PathVariable(name = "year")String year){
+        List<OutcomeModel> alloutcome = outcomeRepository.findAll();
+        OutcomeModel mostOutcome = new OutcomeModel();
+        Integer count = 0;
+        for ( OutcomeModel temp: alloutcome) {
+            if (formatdate.format(temp.getCreatedAt()).substring(0,4).equals(year)){
+                if (count != 0) {
+                    if (temp.getPrice() > mostOutcome.getPrice()) {
+                        mostOutcome = temp;
+                    }
+                }else {
+                    mostOutcome = temp;
+                }
+                count += 1;
+            }
+        }
+        return mostOutcome;
+    }
+
 }
