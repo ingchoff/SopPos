@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/products/product-stock")
+@RequestMapping("/api/products/product-stock")
 public class ProductListController {
 
     @Autowired
@@ -49,8 +49,8 @@ public class ProductListController {
     }
 
     @PostMapping(params = "name")
-    public ResponseEntity<?> updateProductList(@RequestParam(value = "name") String name, @RequestBody ProductList productlist) {
-        if (!productListService.updateProductList(name, productlist)) {
+    public ResponseEntity<?> updateProductList(@RequestParam(value = "name") String name, @RequestBody Product product) {
+        if (!productListService.updateProductList(name, product)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().build();

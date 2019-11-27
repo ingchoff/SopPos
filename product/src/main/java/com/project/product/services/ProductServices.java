@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,10 +36,6 @@ public class ProductServices {
 
     public Product createProduct(Product product) {
         Product result = productRepository.save(product);
-        RestTemplate restTemplate = new RestTemplate();
-        List<ServiceInstance> instances = discoveryClient.getInstances("productlistservice");
-        String serviceUri = String.format("%s/products/product-stock/add", instances.get(0).getUri().toString());
-        restTemplate.postForObject(serviceUri, product, Product.class);
         return result;
     }
 
@@ -59,19 +56,29 @@ public class ProductServices {
         try {
             Optional<Product> result = productRepository.findByProductName(productName);
             productRepository.deleteById(result.get().getId());
+            RestTemplate restTemplate = new RestTemplate();
+            List<ServiceInstance> instances = discoveryClient.getInstances("productlistservice");
+            String serviceUri = String.format("%s/products/product-stock?name=%s", instances.get(0).getUri().toString(), productName);
+            restTemplate.exchange(serviceUri, HttpMethod.DELETE, null, Product.class, productName);
             return true;
         } catch (EmptyResultDataAccessException e) {
             return false;
         }
     }
 
-    public Optional<Product> updateProduct(Long id, Product body) {
-        Optional<Product> customerOptional = productRepository.findById(id);
-        if(!customerOptional.isPresent()) {
-            return customerOptional;
+    public boolean updateProduct(String productName, Product body) {
+        try {
+            Optional<Product> result = productRepository.findByProductName(productName);
+            body.setId(result.get().getId());
+            Optional.of(productRepository.save(body));
+            RestTemplate restTemplate = new RestTemplate();
+            List<ServiceInstance> instances = discoveryClient.getInstances("productlistservice");
+            String serviceUri = String.format("%s/api/products/product-stock?name=%s", instances.get(0).getUri().toString(), productName);
+            restTemplate.postForObject(serviceUri, body, Product.class);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
         }
-        body.setId(id);
-        return Optional.of(productRepository.save(body));
     }
 
     public boolean checkDuplicate(Product body) {
@@ -82,6 +89,24 @@ public class ProductServices {
             checklist.add(r.getProductName());
         });
         ans = !checklist.contains(body.getProductName());
+        return ans;
+    }
+
+    public boolean checkDuplicateArray(ArrayList<Product> body) {
+        ArrayList<Product> result = (ArrayList<Product>) productRepository.findAll();
+        ArrayList<String> checkList = new ArrayList<String>();
+        boolean ans = false;
+        result.forEach((r) -> {
+            checkList.add(r.getProductName());
+        });
+        for (Product p: body) {
+            if (checkList.contains(p.getProductName())) {
+                ans = false;
+                break;
+            } else {
+                ans = true;
+            }
+        }
         return ans;
     }
 }

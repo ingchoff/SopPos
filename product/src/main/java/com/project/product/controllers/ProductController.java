@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
@@ -43,6 +43,16 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/add-all")
+    public ResponseEntity<?> postProducts(@Valid @RequestBody ArrayList<Product> body) {
+        if (productServices.checkDuplicateArray(body)) {
+            productServices.createProducts(body);
+            return ResponseEntity.status(HttpStatus.CREATED).body(body);
+        } else {
+            return ResponseEntity.badRequest().body("มีชื่อโปรดักซ้ำกับข้อมูลทีมีอยู่");
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         if (!productServices.deleteProductById(id)) {
@@ -59,12 +69,11 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody Product body) {
-        Optional<Product> product = productServices.updateProduct(id, body);
-        if (!product.isPresent()) {
+    @PutMapping(params = "name")
+    public ResponseEntity<?> updateProduct(@RequestParam(value = "name") String name, @Valid @RequestBody Product body) {
+        if (!productServices.updateProduct(name, body)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok().build();
     }
 }

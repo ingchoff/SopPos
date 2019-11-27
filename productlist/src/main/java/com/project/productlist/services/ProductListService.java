@@ -29,8 +29,6 @@ public class ProductListService {
     }
 
     public void createProductList(ProductList productList) {
-//        ProductList productList = new ProductList();
-//        productList.setProductName(product.getProductName());
         productListRepository.save(productList);
     }
 
@@ -46,14 +44,11 @@ public class ProductListService {
         }
     }
 
-    public boolean updateProductList(String productName, ProductList productList) {
+    public boolean updateProductList(String productName, Product product) {
         try {
             ArrayList<ProductList> productArray = productListRepository.findByProductName(productName);
             for (ProductList pl: productArray) {
-                pl.setProductName(productList.getProductName());
-                pl.setSkuId(productList.getSkuId());
-                pl.setQuantity(productList.getQuantity());
-                pl.setUnit(productList.getUnit());
+                pl.setProductName(product.getProductName());
                 productListRepository.save(pl);
             }
             return true;
