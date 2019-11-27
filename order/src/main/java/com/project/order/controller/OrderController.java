@@ -46,7 +46,7 @@ public class OrderController {
         return orderservice.getDateOrder(10, year);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public OrderModel updateOrder(@Valid @RequestBody OrderModel orderModel){
         return orderservice.updateOrder(orderModel.getId(), orderModel.getStatus());
     }

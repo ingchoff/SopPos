@@ -47,7 +47,12 @@ public class Orderservice {
     public OrderModel updateOrder(Long id, String status){
         OrderModel order = getById(id);
         order.setStatus(status);
-        return order;
+        return orderRepository.save(order);
+    }
+
+    public String deleteOrder(Long id){
+        orderRepository.deleteById(id);
+        return "Sucess Delete!!!!!";
     }
 
 
