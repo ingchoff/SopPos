@@ -52,6 +52,7 @@ Microservice ระบบ Pos (Point of Sale)
     - /api/orderlist/delete/{id} ลบตาม id
     - /api/orderlist/delete/oid/{oid} ลบตาม oid
 - Invoice port 8095
+    - /api/invoice เรียกดู invoice ทั้งหมด
     - /api/invoice/{id} เรียกดู invoice ตาม id
     - /api/invoice/create สร้าง invoice
  - Account port 8097
