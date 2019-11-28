@@ -17,14 +17,14 @@ Microservice ระบบ Pos (Point of Sale)
   * สรุปข้อมูลการซื้อวัตถุดิบ(Stock)
   * สรุปยอดขายสินค้า รายวัน/เดือน/ปี
   
-* Route
+## Route
   * Stock port 8096
-    */api/stock เรียกดู stock
-    */api/stock/add เพิ่ม stock
-    */api/stock?name=xx เรียกดู ลบ อัพเดท จากขื่อ
+    **/api/stock เรียกดู stock
+    **/api/stock/add เพิ่ม stock
+    **/api/stock?name=xx เรียกดู ลบ อัพเดท จากขื่อ
   * Product port 8093
-    */api/products เรียกดู product
-    */api/products/add เพิ่ม product
+    **/api/products เรียกดู product
+    **/api/products/add เพิ่ม product
     */api/products/{id} เรียกดู product ตาม id
     */api/products?name=xx เรียกดู ลบ อัพเดท จากขื่อ
   * Productlist port 8094
