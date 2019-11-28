@@ -18,29 +18,29 @@ Microservice ระบบ Pos (Point of Sale)
   * สรุปยอดขายสินค้า รายวัน/เดือน/ปี
   
 ## Route
-  * Stock port 8096
-    **/api/stock เรียกดู stock
-    **/api/stock/add เพิ่ม stock
-    **/api/stock?name=xx เรียกดู ลบ อัพเดท จากขื่อ
-  * Product port 8093
-    **/api/products เรียกดู product
-    **/api/products/add เพิ่ม product
+  *Stock port 8096
+    */api/stock เรียกดู stock
+    */api/stock/add เพิ่ม stock
+    */api/stock?name=xx เรียกดู ลบ อัพเดท จากขื่อ
+  *Product port 8093
+    */api/products เรียกดู product
+    */api/products/add เพิ่ม product
     */api/products/{id} เรียกดู product ตาม id
     */api/products?name=xx เรียกดู ลบ อัพเดท จากขื่อ
-  * Productlist port 8094
+  *Productlist port 8094
     */api/productlist เรียกดู productlist
     */api/product/add เพิ่ม productlist
     */api/product/{id} เรียกดู product ตาม id
     */api/product?name=xx เรียกดู ลบ อัพเดท จากขื่อ
     *api/product?skuid=xx อัพเดทจาก skuid
-  * Order port 8099
+  *Order port 8099
     */api/order/create สร้าง order
     */api/order/get เรียกดู order
     */api/order/get/date/{date} เรียกดูตามวัน
     */api/order/get/month/{month} เรียกดูตามเดือน
     */api/order/get/year/{year} เรียกดูตามปี
     */api/order/get/update อัพเดท
-  * OrderList port 8102
+  *OrderList port 8102
     */api/orderlist/create สร้าง orderlist
     */api/orderlist/get เรียกดู orderlist
     */api/orderlist/get/{id} เรียกดู orderlist ตาม id
@@ -50,10 +50,10 @@ Microservice ระบบ Pos (Point of Sale)
     */api/orderlist/update อัพเดท
     */api/orderlist/delete/{id} ลบตาม id
     */api/orderlist/delete/oid/{oid} ลบตาม oid
-  * Invoice port 8095
+  *Invoice port 8095
     */api/invoice/{id} เรียกดู invoice ตาม id
     */api/invoice/create สร้าง invoice
-  * account port 8097
+  *account port 8097
     */api/account/get/profit/all หากำไรทั้งหมด
     */api/account/get/profit/date/{date} หากำไรรายวัน
     */api/account/get/profit/month/{month หากำไรรายเดือน
@@ -71,7 +71,7 @@ Microservice ระบบ Pos (Point of Sale)
     */api/income/get/mostincome/date/{date} เรียกดูรายได้รายวันที่สูงสุด
     */api/income/get/mostincome/year/{year} เรียกดูรายได้รายเดือนที่สูงสุด
     */api/income/get/mostincome/year/{year} เรียกดูรายได้รายปีที่สูงสุด
-     */api/income/get เรียกดูรายได้
+    */api/income/get เรียกดูรายได้
     */api/income/get/{id} เรียกดูรายได้ตาม id
     */api/income/create เพิ่มรายได้
     */api/income/getallincome เรียกดูรายได้ทั้งหมด
