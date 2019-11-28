@@ -71,7 +71,7 @@ Microservice ระบบ Pos (Point of Sale)
     - /api/income/get/list/month/{month} เรียกดูlistรายได้รายเดือน
     - /api/income/get/list/year/{year} เรียกดูlistรายได้รายปี
     - /api/income/get/mostincome/date/{date} เรียกดูรายได้รายวันที่สูงสุด
-    - /api/income/get/mostincome/year/{year} เรียกดูรายได้รายเดือนที่สูงสุด
+    - /api/income/get/mostincome/month/{month} เรียกดูรายได้รายเดือนที่สูงสุด
     - /api/income/get/mostincome/year/{year} เรียกดูรายได้รายปีที่สูงสุด
     - /api/outcome/get เรียกดูรายจ่าย
     - /api/outcome/get/{id} เรียกดูรายจ่ายตาม id
