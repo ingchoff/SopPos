@@ -20,28 +20,35 @@ Microservice ระบบ Pos (Point of Sale)
   
 ## Route
 - Stock port 8096
-  - /api/stock เรียกดู stock
-  - /api/stock/add เพิ่ม stock
-  - /api/stock?name=xx เรียกดู ลบ อัพเดท จากขื่อ
+```
+  - /api/stock เรียกดู stock (GET)
+  - /api/stock/create เพิ่ม stock (POST)
+  - /api/stock?name=xx เรียกดู อัพเดท ลบ จากชื่อ stock โดยใช้ GET PUT DELETE ตามลำดับ
+```
 - Product port 8093
-   - /api/products เรียกดู product
-    - /api/products/add เพิ่ม product
-    - /api/products/{id} เรียกดู product ตาม id
-    - /api/products?name=xx เรียกดู ลบ อัพเดท จากขื่อ
- - Productlist port 8094
-    - /api/productlist เรียกดู productlist
-    - api/product/add เพิ่ม productlist
-    - /api/product/{id} เรียกดู product ตาม id
-    - /api/product?name=xx เรียกดู ลบ อัพเดท จากขื่อ
-    - api/product?skuid=xx อัพเดทจาก skuid
+```
+   - /api/products เรียกดู product (GET)
+   - /api/products/add เพิ่ม product (POST)
+   - /api/products?name=xx เรียกดู อัพเดท ลบ จากชื่อ product โดยใช้ GET PUT DELETE ตามลำดับ
+```
+ - Productlist (service เอาไว้เชื่อม stock กับ product) port 8094
+```
+    - /api/product-stock เรียกดู productlist ทั้งหมด (GET)
+    - /api/product-stock/add เพิ่ม productlist (POST)
+    - /api/product-stock?name=xx เรียกดู อัพเดท ลบ จากชื่อ productlist โดยใช้ GET PUT DELETE ตามลำดับ
+    - /api/product-stock?name=xx ลบจากชื่อ product (DELETE)
+```
  - Order port 8099
+```
     - /api/order/create สร้าง order
     - /api/order/get เรียกดู order
     - /api/order/get/date/{date} เรียกดูตามวัน
     - /api/order/get/month/{month} เรียกดูตามเดือน
     - /api/order/get/year/{year} เรียกดูตามปี
     - /api/order/get/update อัพเดท
+```
  - OrderList port 8102
+```
     - /api/orderlist/create สร้าง orderlist
     - /api/orderlist/get เรียกดู orderlist
     - /api/orderlist/get/{id} เรียกดู orderlist ตาม id
@@ -51,11 +58,15 @@ Microservice ระบบ Pos (Point of Sale)
     - /api/orderlist/update อัพเดท
     - /api/orderlist/delete/{id} ลบตาม id
     - /api/orderlist/delete/oid/{oid} ลบตาม oid
+```
 - Invoice port 8095
+```
     - /api/invoice เรียกดู invoice ทั้งหมด
     - /api/invoice/{id} เรียกดู invoice ตาม id
     - /api/invoice/create สร้าง invoice
+```
  - Account port 8097
+```
     - /api/account/get/profit/all หากำไรทั้งหมด
     - /api/account/get/profit/date/{date} หากำไรรายวัน
     - /api/account/get/profit/month/{month หากำไรรายเดือน
@@ -86,7 +97,7 @@ Microservice ระบบ Pos (Point of Sale)
     - /api/outcome/get/mostoutcome/date/{date} เรียกดูรายจ่ายรายวันที่สูงสุด
     - /api/outcome/get/mostoutcome/year/{year} เรียกดูรายจ่ายรายเดือนที่สูงสุด
     - /api/outcome/get/mostoutcome/year/{year} เรียกดูรายจ่ายรายปีที่สูงสุด
-
+```
 
     
     
