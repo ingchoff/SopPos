@@ -1,7 +1,10 @@
 
 # SopPos
-Microservice ระบบ Pos (Point of Sale)
+Microservice ระบบ Pos (Point of Sale)  
 ![Imgur](https://www.mx7.com/i/0bc/MN3Dwf.jpg)
+![Imgur](https://i.imgur.com/lRXRwqh.jpg)
+### Presentation Slide
+[Presentation Slide](https://docs.google.com/presentation/d/1bG-yr2pnULOYmUp5Ueyw42R4IQsZm4aFT8VgGmsZxKk/edit?usp=sharing)
 ## :question: ระบบ POS คืออะไร
 **ระบบ POS** ย่อมาจาก Point of Sale System หรือ ระบบขายหน้าร้าน ซึ่งนำหลักการของเครื่องคิดเงิน (Cash Register) มาเขียนโปรแกรมพัฒนาบนคอมพิวเตอร์
 แล้วเพิ่มเติมความสามารถต่างๆที่เครื่องเก็บเงินทำไม่ได้ เช่น สามารถตัดสต็อกได้ ดูความเคลื่อนไหวต่างๆของสินค้า สรุปข้อมูลยอดขาย เป็นต้น
