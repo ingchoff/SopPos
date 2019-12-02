@@ -66,7 +66,7 @@ public class ProductController {
         if (!productServices.deleteProductByName(name)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).body("ลบข้อมูลแล้ว");
     }
 
     @PutMapping(params = "name")
@@ -74,6 +74,6 @@ public class ProductController {
         if (!productServices.updateProduct(name, body)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).body("อัพเดตข้อมูลแล้ว");
     }
 }

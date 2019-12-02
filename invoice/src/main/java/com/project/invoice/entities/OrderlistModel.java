@@ -1,11 +1,15 @@
-package com.project.order.model;
+package com.project.invoice.entities;
 
 import lombok.Data;
 
 @Data
-public class OrderListModel {
+public class OrderlistModel {
+
     private Long id;
+
     private String productName;
-    private Long oid;
+
+    private String oid;
+
     private Integer quantity;
 }

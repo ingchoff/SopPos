@@ -33,8 +33,9 @@ public class OrderlistController {
     public OrderlistModel getOrderlist(@PathVariable(name = "id")Long id){
         return orderService.getOneOrderlist(id);
     }
+
     @GetMapping("/get/oid/{oid}")
-    public List<OrderlistModel> getOrderlistByOid(@PathVariable(name = "oid")Long oid){
+    public List<OrderlistModel> getOrderlistByOid(@PathVariable(name = "oid") String oid){
         return orderService.getAllOrderByOid(oid);
     }
 

@@ -58,7 +58,7 @@ public class ProductServices {
             productRepository.deleteById(result.get().getId());
             RestTemplate restTemplate = new RestTemplate();
             List<ServiceInstance> instances = discoveryClient.getInstances("productlistservice");
-            String serviceUri = String.format("%s/products/product-stock?name=%s", instances.get(0).getUri().toString(), productName);
+            String serviceUri = String.format("%s/api/products/product-stock?name=%s", instances.get(0).getUri().toString(), productName);
             restTemplate.exchange(serviceUri, HttpMethod.DELETE, null, Product.class, productName);
             return true;
         } catch (EmptyResultDataAccessException e) {

@@ -30,7 +30,7 @@ public class StockController {
     public ResponseEntity<?> getStock(@RequestParam(value = "name") String name) {
         Optional<Stock> stock = stockServices.getByName(name);
         if(!stock.isPresent()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("ไม่พบข้อมูล");
         }
         return ResponseEntity.ok(stock);
     }
@@ -72,6 +72,6 @@ public class StockController {
         if (!stockServices.updateStock(name, body)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(body);
     }
 }

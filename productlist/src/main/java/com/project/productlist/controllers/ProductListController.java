@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/products/product-stock")
+@RequestMapping("/api/product-stock")
 public class ProductListController {
 
     @Autowired
@@ -44,9 +44,9 @@ public class ProductListController {
     @DeleteMapping(params = "name")
     public ResponseEntity<?> deleteProductList(@RequestParam(value = "name") String name) {
         if (!productListService.deleteProductListByName(name)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("");
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).body("ลบข้อมูลแล้ว");
     }
 
     @PostMapping(params = "name")

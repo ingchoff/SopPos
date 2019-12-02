@@ -53,7 +53,7 @@ public class Orderservice {
 
     public String deleteOrder(Long id){
         orderRepository.deleteById(id);
-        return "Sucess Delete!!!!!";
+        return "Success Delete!!!!!";
     }
 
 

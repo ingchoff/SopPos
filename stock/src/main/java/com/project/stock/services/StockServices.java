@@ -38,10 +38,6 @@ public class StockServices {
 
     public Stock createStock(Stock stock) {
         return stockRepository.save(stock);
-//        RestTemplate restTemplate = new RestTemplate();
-//        List<ServiceInstance> instances = discoveryClient.getInstances("productlistservice");
-//        String serviceUri = String.format("%s/products/product-stock/add", instances.get(0).getUri().toString());
-//        restTemplate.postForObject(serviceUri, product, Product.class);
     }
 
     public void createProducts(ArrayList<Stock> product) {
@@ -96,11 +92,13 @@ public class StockServices {
 
     public void addStock(Outcome outcome) {
         Optional<Stock> optionalStock = stockRepository.findBySkuId(outcome.getSku_id());
-        Stock result = optionalStock.get();
-        Double quantity = result.getQuantity() + outcome.getQuantity();
-        result.setQuantity(quantity);
-        Double price = result.getPrice() + outcome.getPrice();
-        result.setPrice(price);
-        Optional.of(stockRepository.save(result));
+        if (optionalStock.isPresent()) {
+            Stock result = optionalStock.get();
+            Double quantity = result.getQuantity() + outcome.getQuantity();
+            result.setQuantity(quantity);
+            Double price = result.getPrice();
+            result.setPrice(price);
+            Optional.of(stockRepository.save(result));
+        }
     }
 }

@@ -39,12 +39,12 @@ public class OrderController {
 
     @GetMapping("/get/month/{month}")
     public List<OrderModel> getByMonth(@PathVariable(name = "month")String month){
-        return orderservice.getDateOrder(10, month);
+        return orderservice.getDateOrder(7, month);
     }
 
     @GetMapping("/get/year/{year}")
     public List<OrderModel> getByYear(@PathVariable(name = "year")String year){
-        return orderservice.getDateOrder(10, year);
+        return orderservice.getDateOrder(4, year);
     }
 
     @PostMapping("/update")

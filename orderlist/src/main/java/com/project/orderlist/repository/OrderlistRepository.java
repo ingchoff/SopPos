@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface OrderlistRepository extends JpaRepository<OrderlistModel, Long> {
-    List<OrderlistModel> findAllByOid(Long oid);
+    List<OrderlistModel> findAllByOid(String oid);
     List<OrderlistModel> findAllByProductName(String productName);
 }

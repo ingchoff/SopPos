@@ -3,6 +3,7 @@ package com.project.orderlist.service;
 import com.project.orderlist.exception.ResourceNotFoundException;
 import com.project.orderlist.model.OrderlistModel;
 import com.project.orderlist.repository.OrderlistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 public class OrderService {
     private OrderlistRepository orderlistRepository;
-
+    @Autowired
     public OrderService(OrderlistRepository repo){
         this.orderlistRepository = repo;
     }
@@ -33,7 +34,7 @@ public class OrderService {
         return orderlistRepository.findAll();
     }
 
-    public List<OrderlistModel> getAllOrderByOid(Long oid){
+    public List<OrderlistModel> getAllOrderByOid(String oid){
         return orderlistRepository.findAllByOid(oid);
     }
 
@@ -54,7 +55,7 @@ public class OrderService {
     }
 
     public String deleteAllOrderlist(Long oid){
-        List<OrderlistModel> orderlist = getAllOrderByOid(oid);
+        List<OrderlistModel> orderlist = getAllOrderByOid(Long.toString(oid));
         orderlistRepository.deleteAll(orderlist);
         return "Sucees Delete!!!!!!!!";
     }
