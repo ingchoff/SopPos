@@ -21,7 +21,7 @@ Microservice ระบบ Pos (Point of Sale)
   * สรุปข้อมูลการซื้อวัตถุดิบ(Stock)
   * สรุปยอดขายสินค้า รายวัน/เดือน/ปี
   
-## Route
+## Route Service
 - Stock port 8096
 ```
   - /api/stock เรียกดู stock (GET)
